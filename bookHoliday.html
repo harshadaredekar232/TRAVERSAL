@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bookHoliday.css">
+  <title>Traversal | Booking</title>
+</head>
+<body>
+    <div class="video-container">
+        <video src="assets/video.mp4" loop autoplay muted></video>
+    </div>
+    <div class="form-container">
+        <div class="box_container">
+            <form id="bookingForm" method="post" action="booked.html">
+                <h3>BOOK A HOLIDAY</h3>
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" class="box" required>
+          
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" class="box" required>
+          
+                <label for="adults">Number of Adults:</label>
+                <input type="number" id="adults" name="adults" min="1" class="box" required>
+          
+                <label for="children">Number of Children:</label>
+                <input type="number" id="children" name="children" class="box" min="0">
+          
+                <button type="button" class="btn" onclick="submitBooking()">Book Now</button>
+              </form>
+        </div>
+        <div id="bookingResult"></div>
+    </div>
+    
+
+  <script>
+    function submitBooking() {
+      // Fetch form data
+      const destination = document.getElementById('destination').value;
+      const date = document.getElementById('date').value;
+      const adults = document.getElementById('adults').value;
+      const children = document.getElementById('children').value;
+      /* // Display booking result
+      const resultContainer = document.getElementById('bookingResult');
+      resultContainer.innerHTML = `
+        <h2>Booking Summary</h2>
+        <p><strong>Destination:</strong> ${destination}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Adults:</strong> ${adults}</p>
+        <p><strong>Children:</strong> ${children}</p>
+        <p>Your booking has been confirmed!</p>
+      `; */
+      const bookingData = {
+        destination,                                  
+        date,
+        adults,
+        children,
+      };
+      sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+
+      // Redirect to the results page
+      window.location.href = 'booked.html';
+    }
+  </script>
+</body>
+</html>

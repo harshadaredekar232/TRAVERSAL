@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traversal | Booking Results</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    * {
+    font-family: "Nunito", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    align-items: center;
+    }
+    .video-container video{
+    position: absolute;
+    top:0; left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    }
+    .form-container{
+        position: fixed;
+        z-index: 10000;
+        top: 0; left: 0;
+        min-height: 100vh;
+        width: 100%;
+        background-color: rgb(0,0,0,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-container .box_container{
+        margin: 2rem;
+        padding: 1.5rem 2rem;
+        border-radius: 0.5rem;
+        background-color:  #f3f4f6;
+        width: 50rem;
+    }
+    .form-container .box_container h3{
+        font-size: 3rem;
+        color: #282d31;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+    <div class="video-container">
+        <video src="assets/video.mp4" loop autoplay muted></video>
+    </div>
+    <div class="form-container">
+        <div class="box_container">
+            <h3>Booking Summary</h3>
+            <div id="bookingResult"></div>
+            <p>Your booking has been confirmed!</p>
+        </div>
+    </div>
+
+  <script>
+    // Retrieve booking data from session storage
+    const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
+
+    if (bookingData) {
+      // Display booking result
+      const resultContainer = document.getElementById('bookingResult');
+      resultContainer.innerHTML = `
+        <p><strong>Destination:</strong> ${bookingData.destination}</p>
+        <p><strong>Date:</strong> ${bookingData.date}</p>
+        <p><strong>Adults:</strong> ${bookingData.adults}</p>
+        <p><strong>Children:</strong> ${bookingData.children}</p>
+      `;
+    } else {
+      // If there's no booking data, redirect to the booking page
+      window.location.href = 'bookingpage.html';
+    }
+  </script>
+</body>
+</html>
